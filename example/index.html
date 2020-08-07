@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>timeling example</title>
+  <link rel="stylesheet" href="../timeling.css">
+  <script src="../index.js" type="module"></script>
+</head>
+
+<body>
+  <timeling-timeline class="timeline"></timeling-timeline>
+  <hr>
+  <timeling-timeline class="timeline" group-by="group"></timeling-timeline>
+  <script>
+
+    const timelines = Array.from(document.querySelectorAll('.timeline'))
+
+    // timeline.setAttribute('data', JSON.stringify([
+    //   {name: "Mr. Fubar", group: "Project X", start: "2019-07-08", end: "2020-08-15"},
+    //   {name: "Mr. Fubar", group: "Project Y", start: "2020-08-12", end: "2020-08-31"},
+    //   {name: "Mrs. Oklahoma", group: "Project X", start: "2020-08-08", end: "2020-12-31"},
+    //   {name: "Mrs. Blue", group: "Project X (invalid end date)", start: "2020-08-08", end: "2020-11-31"}
+    // ]))
+
+    customElements.whenDefined('timeling-timeline').then(() => {
+      timelines.forEach(timeline => {
+        timeline.initialize([
+          {name: "Mr. Fubar", group: "Project X", start: "2019-07-08", end: "2020-08-15"},
+          {name: "Mr. Fubar", group: "Project Y", start: "2020-08-12", end: "2020-08-31"},
+          {name: "Mrs. Oklahoma", group: "Project X", start: "2020-08-08", end: "2020-12-31"},
+          {name: "Mrs. Blue", group: "Project X (invalid end date)", start: "2020-08-08", end: "2020-11-31"}
+        ])
+        timeline.build()
+      }
+
+      )
+    })
+  </script>
+</body>
+
+</html>

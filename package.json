@@ -4,20 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/*.js"
   },
   "author": "Falk Hoppe <falkhoppe81@gmail.com>",
   "license": "MIT",
-  "bin": {
-    "timeling": "bin/timeling.js"
-  },
   "devDependencies": {
     "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "http-server": "^0.12.3",
+    "qunit": "^2.10.1"
   },
   "type": "module",
   "module": "index.js"
