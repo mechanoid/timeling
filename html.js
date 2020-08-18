@@ -1,14 +1,14 @@
 /* global DocumentFragment */
 
 const renderFragment = fragment => {
-  const container = document.createElement('div')
-  container.appendChild(fragment)
-  return container.innerHTML
+  return fragment.innerHTML
 }
 
 const renderArg = arg => {
   if (arg instanceof DocumentFragment) {
-    return renderFragment(arg)
+    const res = renderFragment(arg)
+    console.log(res)
+    return res
   } else if (arg instanceof Array) {
     return arg.map(renderArg).join('')
   }
@@ -20,8 +20,7 @@ const renderTemplate = args => (val, index) => {
   return [val, renderArg(arg)]
 }
 
-export const dom = (strings, ...args) => {
+export const html = (strings, ...args) => {
   const templateString = strings.flatMap(renderTemplate(args))
-
   return document.createRange().createContextualFragment(templateString.join(''))
 }

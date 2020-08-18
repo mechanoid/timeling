@@ -1,11 +1,10 @@
 /* global HTMLElement, customElements */
-import { dom } from './dom.js'
+import { html } from './html.js'
 
-const timelineItem = (item, groupedBy) => `
-  ${groupedBy === 'name' ? dom`${item.group} ${item.name}` : dom`${item.name} ${item.group}`}
-`
+const timelineItem = (item, groupedBy) =>
+  groupedBy === 'name' ? html`${item.group} ${item.name}` : html`${item.name} ${item.group}`
 
-const timelineItems = (items, groupedBy) => dom`
+const timelineItems = (items, groupedBy) => html`
   <timeling-timeline-items>
     ${items.map(item => timelineItem(item, groupedBy))}
   </timeling-timeline-items>
@@ -15,11 +14,18 @@ class TimelingTimeline extends HTMLElement {
   constructor () {
     super()
 
-    this.rows = dom`<timeling-rows></timeling-rows>`
-    this.appendChild(this.rows)
+    const rows = html`<timeling-rows></timeling-rows>`
+    this.rows = rows
+    console.log(this.rows)
+    this.appendChild(rows)
+
+    this.rows = this.querySelector('timeling-rows')
+
+    console.log(this.rows)
   }
 
   connectedCallback () {
+    this.rows = this.querySelector('timeling-rows')
     if (this.getAttribute('data')) { // else initialize yourself
       this.initialize(JSON.parse(this.getAttribute('data')))
       this.build()
@@ -28,9 +34,8 @@ class TimelingTimeline extends HTMLElement {
 
   build () {
     const data = this.groupedData
-
     Object.entries(data).map(([group, items]) => {
-      this.appendChild(dom`<timeling-row>
+      this.rows.appendChild(html`<timeling-row>
         <timeling-row-label>${group}</timeling-row-label>
         ${timelineItems(items, this.groupedBy)}
       <timeling-row>`)
